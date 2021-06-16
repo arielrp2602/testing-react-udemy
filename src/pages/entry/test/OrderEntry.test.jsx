@@ -13,6 +13,6 @@ test('handles error for scoops and toppings routes', async() => {
 
   waitFor(async() => {
     const alerts = await screen.findAllByRole('alert', { name: 'An unexpected error ocurred. Please try again later.' });
-    expect(alerts).toHaveLength(3);
+    expect(alerts).toHaveLength(2);
   });
 });
