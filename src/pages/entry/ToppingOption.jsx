@@ -2,7 +2,7 @@ import { Col, Form, Row } from "react-bootstrap";
 
 const ToppingOption = ({ imagePath, name, updateItemCount }) => {
 	function handleChange({ target }) {
-		updateItemCount(name, target.value);
+		updateItemCount(name, Number(target.checked));
 	}
 
 	return (
@@ -22,8 +22,8 @@ const ToppingOption = ({ imagePath, name, updateItemCount }) => {
 				</Form.Label>
 				<Col xs={5} style={{ textAlign: "left" }}>
 					<Form.Control
-						type="number"
-						defaultValue={0}
+						type="checkbox"
+						defaultChecked={false}
 						onChange={handleChange}
 					/>
 				</Col>
