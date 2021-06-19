@@ -7,35 +7,39 @@ test('order phases for happy path', async() => {
   render(<App />);
 
   // add ice cream scoops and toppings
-  const vanillaInput = await screen.findByRole('spinbutton', { name: ' Vanilla '});
-  userEvent.clear(vanillaInput)
-  userEvent.type(vanillaInput, '2')
+	const vanillaInput = await screen.findByRole("spinbutton", {
+		name: "Vanilla",
+	});
+	userEvent.clear(vanillaInput);
+	userEvent.type(vanillaInput, "1");
 
-  const chocoInput = screen.findByRole('spinbutton', { name: 'Chocolate' });
-  userEvent.clear(chocoInput);
-  userEvent.type(chocoInput, '1');
+	const chocolateInput = await screen.findByRole("spinbutton", {
+		name: "Chocolate",
+	});
+	userEvent.clear(chocolateInput);
+	userEvent.type(chocolateInput, "2");
 
   const hotFudge = await screen.findByRole('checkbox', { name: 'Hot fudge' });
   userEvent.click(hotFudge)
 
   // find and click order button
-  const orderButton = screen.getByRole('button', { name: /confirm order/i });;
+  const orderButton = screen.getByRole('button', { name: /order sundae/i });;
   userEvent.click(orderButton);
 
   // check summary information based on order
-  const summaryHeading = screen.getByRole('heading', { name: 'Order Summary '});
+  const summaryHeading = screen.getByRole('heading', { name: 'Order Summary' });
   expect(summaryHeading).toBeInTheDocument();
 
-  const scoopsHeading = screen.getByRole('heading', { name: 'Scoops: $6.00 '});
+  const scoopsHeading = screen.getByRole('heading', { name: 'Scoops: $6.00'});
   expect(scoopsHeading).toBeInTheDocument();
 
-  const toppingsHeading = screen.getByRole('heading', { name: 'Toppings:  $1.50 '});
+  const toppingsHeading = screen.getByRole('heading', { name: 'Toppings: $1.50'});
   expect(toppingsHeading).toBeInTheDocument();
   
   // check summary option items
-  expect(screen.getByText('2 Vanilla')).toBeInTheDocument()
-  expect(screen.getByText('1 Chocolate')).toBeInTheDocument()
-  expect(screen.getByText('Hot Fudge')).toBeInTheDocument()
+  expect(screen.getByText('1 Vanilla')).toBeInTheDocument()
+  expect(screen.getByText('2 Chocolate')).toBeInTheDocument()
+  expect(screen.getByText('Hot fudge')).toBeInTheDocument()
   
   // accept terms and conditions and click button to confirm order
   const tcCheck = screen.getByRole('checkbox', { name: /terms and conditions/i });
